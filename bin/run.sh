@@ -9,7 +9,7 @@ set -o pipefail
 #set -o xtrace
 
 cd ${BASE_DIR}
-docker run --rm -ti -u root \
-  -v ./nix/:/root/nix/ \
-  -v ./code/:/home/setup/code/ \
-  almalinux96-with-nix bash
+docker run --rm -ti -h almalinux96 \
+  -v ${BASE_DIR}:${BASE_DIR} \
+  -w ${BASE_DIR} \
+  almalinux96-with-nix bash -l

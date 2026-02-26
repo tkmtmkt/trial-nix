@@ -2,8 +2,11 @@ FROM almalinux:9.6
 
 # OSパッケージインストール
 RUN --mount=type=cache,target=/var/cache/dnf <<'EOF'
-echo 9.6 > /etc/dnf/vars/release
 set -o errexit
+releasever=9.6
+echo "${releasever}" > /etc/dnf/vars/releasever
+ln -s RPM-GPG-KEY-EPEL-9 /etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-${releasever}
+dnf -y install epel-release
 dnf -y update
 dnf clean all
 EOF
@@ -13,33 +16,26 @@ RUN <<'EOF'
 set -o errexit
 useradd -u 1000 -m setup
 mkdir -m 0755 /nix
-chown setup /nix
+chown -R setup:setup /nix
 EOF
 
 USER setup
+ENV USER=setup
 
-# Nixインストール
-RUN <<'EOF'
+RUN --mount=type=bind,source=./assets,target=/assets <<'EOF'
 set -o errexit
-sh <(curl -L https://nixos.org/nix/install)
-# Flakesを有効にする（~/.config/nix/nix.conf）
-mkdir -p ~/.config/nix
-echo "experimental-features = nix-command flakes" >> ~/.config/nix/nix.conf
-EOF
-
-# Nixパッケージ追加
-RUN <<'EOF'
-# https://www.nixhub.io/
-export USER=setup
+# Nixインストール
+sh <(curl -L https://nixos.org/nix/install) --no-daemon
+cp -r /assets/_config/ /home/setup/.config/
+# パッケージ追加
 . /home/setup/.nix-profile/etc/profile.d/nix.sh
-type nix
-nix profile add nixpkgs#geos
-nix profile add nixpkgs#gdal
-nix profile add nixpkgs#proj
-nix profile add nixpkgs#uv
+nix profile add nixpkgs/01b6809f7f9d1183a2b3e081f0a1e6f8f415cb09#geos
+nix profile add nixpkgs/677fbe97984e7af3175b6c121f3c39ee5c8d62c9#gdal
+nix profile add nixpkgs/ee09932cedcef15aaf476f9343d1dea2cb77e261#proj
+# home-manager設定
+nix run home-manager/master -- switch
 EOF
 
-WORKDIR /home/setup/src
 # PYTHONDONTWRITEBYTECODEとPYTHONUNBUFFEREDはオプション
 # pycファイル(および__pycache__)の生成を行わないようにする
 ENV PYTHONDONTWRITEBYTECODE=1
@@ -48,11 +44,13 @@ ENV PYTHONUNBUFFERED=1
 # Pythonパッケージインストール
 ENV UV_LINK_MODE=copy
 RUN --mount=type=cache,target=/home/code/.local/share/virtualenv <<'EOF'
-export USER=setup
 . /home/setup/.nix-profile/etc/profile.d/nix.sh
 # uvプロジェクト作成
+mkdir ~/code && cd ~/code
 uv init --python 3.14
 # プロジェクト環境にパッケージインストール
 uv add ipython
 uv sync
 EOF
+
+WORKDIR /home/setup
