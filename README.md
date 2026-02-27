@@ -7,6 +7,9 @@ Nix
 # dockerイメージ作成
 bin/build.sh
 
+# イメージ確認
+bin/images.sh
+
 # dockerコンテナ作成してbash実行
 bin/run.sh
 ```

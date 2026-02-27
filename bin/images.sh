@@ -9,7 +9,4 @@ set -o pipefail
 #set -o xtrace
 
 cd ${BASE_DIR}
-docker run --rm -ti -h almalinux96 \
-  -v ${BASE_DIR}:${BASE_DIR} \
-  -w ${BASE_DIR} \
-  ${NAME} bash -l
+docker images ${NAME}
