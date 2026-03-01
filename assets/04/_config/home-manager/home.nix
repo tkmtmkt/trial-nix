@@ -17,17 +17,27 @@
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
-  home.packages = [
+  home.packages = with pkgs; [
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
     # pkgs.hello
-    pkgs.tree
-    pkgs.vim
-    pkgs.git
-    pkgs.tig
-    pkgs.vifm
-    pkgs.lnav
-    pkgs.htop
+    bat                 # catの代替コマンド
+    fd                  # findの代替コマンド
+    fio                 # ディスク性能テストツール
+    git                 # バージョン管理ツール
+    hexyl               # odの代替コマンド
+    htop                # topの代替コマンド
+    lnav                # ログビューア
+    p7zip               # ファイルアーカイバ
+    procs               # psの代替コマンド
+    pwgen               # ランダムなパスワードを生成するコマンド
+    ripgrep             # grepの代替コマンド
+    tig                 # gitブラウザ
+    tmux                # ターミナルエミュレータ
+    tree                # ディレクトリ構造表示ツール
+    uv                  # Pythonパッケージ管理ツール
+    vifm                # ファイルマネージャ
+    vim                 # テキストエディタ
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
@@ -50,6 +60,12 @@
     # # the Nix store. Activating the configuration will then make '~/.screenrc' a
     # # symlink to the Nix store copy.
     # ".screenrc".source = dotfiles/screenrc;
+    ".bash_aliases".force = true;
+    ".bash_aliases".source = dotfiles/_bash_aliases;
+    ".bash_profile".force = true;
+    ".bash_profile".source = dotfiles/_bash_profile;
+    ".bashrc".force = true;
+    ".bashrc".source = dotfiles/_bashrc;
 
     # # You can also set the file content immediately.
     # ".gradle/gradle.properties".text = ''
@@ -76,6 +92,7 @@
   #
   home.sessionVariables = {
     # EDITOR = "emacs";
+    UV_PROJECT_ENVIRONMENT = "${config.home.homeDirectory}/.local/share/uv/venv";
   };
 
   # Let Home Manager install and manage itself.

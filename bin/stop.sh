@@ -9,7 +9,4 @@ set -o pipefail
 #set -o xtrace
 
 cd ${BASE_DIR}
-docker run --privileged --rm -ti --name ${NAME} -h ${NAME} \
-  -v ${BASE_DIR}:${BASE_DIR} \
-  -w ${BASE_DIR} \
-  ${NAME} "$@"
+docker stop ${NAME}

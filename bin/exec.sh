@@ -9,7 +9,8 @@ set -o pipefail
 #set -o xtrace
 
 cd ${BASE_DIR}
-docker run --privileged --rm -ti --name ${NAME} -h ${NAME} \
-  -v ${BASE_DIR}:${BASE_DIR} \
-  -w ${BASE_DIR} \
-  ${NAME} "$@"
+if [[ $# -eq 0 ]]; then
+  docker exec -ti -u setup ${NAME} bash --login
+else
+  docker exec -ti -u setup ${NAME} "$@"
+fi

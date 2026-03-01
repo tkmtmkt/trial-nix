@@ -6,7 +6,11 @@ set -o nounset
 set -o pipefail
 #set -o xtrace
 
+# ファイル配置
+cp -r ${SCRIPT_DIR}/code ~/
+
 # Nix設定
+export USER=$(id -un)
 . ~/.nix-profile/etc/profile.d/nix.sh
 
 # PYTHONDONTWRITEBYTECODEとPYTHONUNBUFFEREDはオプション
@@ -15,10 +19,8 @@ export PYTHONDONTWRITEBYTECODE=1
 # 標準出力・標準エラーのストリームのバッファリングを行わない
 export PYTHONUNBUFFERED=1
 
-# uvプロジェクト作成
-export UV_LINK_MODE=copy
-mkdir ~/code && cd ~/code
-uv init --python 3.14
-# プロジェクト環境にパッケージインストール
-#uv add ipython
+# ユーザ環境にパッケージインストール
+export UV_PROJECT_ENVIRONMENT=${HOME}/.local/share/uv/venv
+cd ~/code
 uv sync
+uv cache clean

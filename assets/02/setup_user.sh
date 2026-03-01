@@ -6,6 +6,10 @@ set -o nounset
 set -o pipefail
 #set -o xtrace
 
-useradd -u 1000 -m setup
+# ユーザ追加
+useradd -u 1000 -m setup -G wheel
+echo 'Passw0rd' | passwd --stdin setup
+
+# Nixストアディレクトリ作成
 mkdir -m 0755 /nix
-chown -R setup:setup /nix
+chown setup:setup /nix

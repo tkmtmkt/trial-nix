@@ -12,8 +12,8 @@ cd ${BASE_DIR}
 docker build -t ${NAME} .
 
 # タグ設定
-TAG=$(docker images -q ${NAME}:latest)
-TAG_COUNT=$(docker images | grep ${TAG} | wc -l)
-if [[ ${TAG_COUNT} -eq 1 ]]; then
+LATEST_ID=$(docker images -q ${NAME}:latest)
+LATEST_COUNT=$(docker images | grep ${LATEST_ID} | wc -l)
+if [[ ${LATEST_COUNT} -eq 1 ]]; then
   docker tag ${NAME}:latest ${NAME}:$(date +%F-%H%M%S)
 fi

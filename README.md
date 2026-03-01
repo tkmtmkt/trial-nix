@@ -55,6 +55,10 @@ bin/run.sh
 インストールとセットアップ
 
 ```sh
+# Nixストアディレクトリ作成
+$ sudo mkdir -m 0755 /nix
+$ sudo chown setup:setup /nix
+
 # Nixインストール
 $ sh <(curl -L https://nixos.org/nix/install) --no-daemon
 $ . ~/.nix-profile/etc/profile.d/nix.sh
