@@ -6,9 +6,6 @@ set -o nounset
 set -o pipefail
 #set -o xtrace
 
-# ファイル配置
-cp -r ${SCRIPT_DIR}/code ~/
-
 # Nix設定
 export USER=$(id -un)
 . ~/.nix-profile/etc/profile.d/nix.sh
@@ -20,7 +17,15 @@ export PYTHONDONTWRITEBYTECODE=1
 export PYTHONUNBUFFERED=1
 
 # ユーザ環境にパッケージインストール
-export UV_PROJECT_ENVIRONMENT=${HOME}/.local/share/uv/venv
+export UV_PROJECT_ENVIRONMENT=${HOME}/.local/share/venv
+
+# ファイル配置
+mkdir -p ~/.config
+cp -r ${SCRIPT_DIR}/_config/* ~/.config/
+cp -r ${SCRIPT_DIR}/trial-django/code ~/
+
+# サンプルプロジェクト
 cd ~/code
 uv sync
+uv run python manage.py collectstatic
 uv cache clean

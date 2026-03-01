@@ -1,0 +1,3 @@
+[submodule "assets/05/trial-django"]
+	path = assets/05/trial-django
+	url = https://github.com/tkmtmkt/trial-django.git

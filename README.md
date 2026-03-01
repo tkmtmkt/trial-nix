@@ -4,14 +4,24 @@ Nix
 ## 操作
 
 ```
+# submodule取得
+git submodule init
+git submodule update
+
 # dockerイメージ作成
 bin/build.sh
 
 # イメージ確認
 bin/images.sh
 
-# dockerコンテナ作成してbash実行
+# dockerコンテナ実行
 bin/run.sh
+
+# コンテナ内でbash実行
+bin/exec.sh
+
+# コンテナ内でbash実行(直接実行)
+bin/run.sh bash -l
 ```
 
 ## 参考

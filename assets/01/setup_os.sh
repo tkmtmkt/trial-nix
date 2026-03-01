@@ -16,7 +16,10 @@ dnf -y install \
   gcc-c++ \
   glibc-langpack-ja \
   glibc-locale-source \
+  httpd \
+  httpd-devel \
   iproute \
+  openssh-clients \
   passwd \
   procps-ng \
   sudo
@@ -33,3 +36,6 @@ echo 'LANG="ja_JP.UTF-8"' > /etc/locale.conf
 
 # タイムゾーン設定
 ln -sf /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
+
+# サービス有効化
+systemctl enable httpd

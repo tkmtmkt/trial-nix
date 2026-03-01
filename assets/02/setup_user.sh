@@ -13,3 +13,7 @@ echo 'Passw0rd' | passwd --stdin setup
 # Nixストアディレクトリ作成
 mkdir -m 0755 /nix
 chown setup:setup /nix
+
+# httpd設定
+ln -s /home/setup/.config/etc/httpd.conf /etc/httpd/conf.d/setup.conf
+chmod a+rx /home/setup

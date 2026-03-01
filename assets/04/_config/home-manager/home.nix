@@ -66,6 +66,8 @@
     ".bash_profile".source = dotfiles/_bash_profile;
     ".bashrc".force = true;
     ".bashrc".source = dotfiles/_bashrc;
+    ".ssh/config".force = true;
+    ".ssh/config".source = dotfiles/_ssh/config;
 
     # # You can also set the file content immediately.
     # ".gradle/gradle.properties".text = ''
@@ -92,7 +94,7 @@
   #
   home.sessionVariables = {
     # EDITOR = "emacs";
-    UV_PROJECT_ENVIRONMENT = "${config.home.homeDirectory}/.local/share/uv/venv";
+    UV_PROJECT_ENVIRONMENT = "${config.home.homeDirectory}/.local/share/venv";
   };
 
   # Let Home Manager install and manage itself.
