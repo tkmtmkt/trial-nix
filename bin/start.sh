@@ -8,7 +8,8 @@ set -o nounset
 set -o pipefail
 #set -o xtrace
 
-docker run --rm -ti --name ${NAME} -h ${NAME} \
+docker run --privileged --rm -td --name ${NAME} -h ${NAME} \
   -v ${BASE_DIR}:${BASE_DIR} \
   -w ${BASE_DIR} \
-  ${NAME} bash -l
+  -p 8000:80 \
+  ${NAME} "$@"

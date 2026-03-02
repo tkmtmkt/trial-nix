@@ -8,8 +8,7 @@ set -o nounset
 set -o pipefail
 #set -o xtrace
 
-cd ${BASE_DIR}
-docker build -t ${NAME} .
+docker build -t ${NAME} ${BASE_DIR}
 
 # タグ設定
 LATEST_ID=$(docker images -q ${NAME}:latest)

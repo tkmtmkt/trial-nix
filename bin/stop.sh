@@ -8,5 +8,4 @@ set -o nounset
 set -o pipefail
 #set -o xtrace
 
-cd ${BASE_DIR}
 docker stop ${NAME}
