@@ -16,15 +16,13 @@ export PYTHONDONTWRITEBYTECODE=1
 # 標準出力・標準エラーのストリームのバッファリングを行わない
 export PYTHONUNBUFFERED=1
 
-# ユーザ環境にパッケージインストール
-export UV_PROJECT_ENVIRONMENT=${HOME}/.local/share/venv
-
 # ファイル配置
 mkdir -p ~/.config
 cp -r ${SCRIPT_DIR}/_config/* ~/.config/
 cp -r ${SCRIPT_DIR}/trial-django/code ~/
 
-# サンプルプロジェクト
+# ユーザ環境にパッケージインストール
+export UV_PROJECT_ENVIRONMENT=${HOME}/.local/share/venv
 cd ~/code
 uv sync
 uv run python manage.py collectstatic

@@ -10,9 +10,9 @@ set -o pipefail
 releasever=9.6
 echo "${releasever}" > /etc/dnf/vars/releasever
 ln -s RPM-GPG-KEY-EPEL-9 /etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-${releasever}
-dnf -y install epel-release
-dnf -y update
-dnf -y install \
+dnf install -y epel-release
+dnf update -y
+dnf install -y \
   gcc-c++ \
   glibc-langpack-ja \
   glibc-locale-source \
