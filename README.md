@@ -14,14 +14,17 @@ bin/build.sh
 # イメージ確認
 bin/images.sh
 
-# dockerコンテナ実行
-bin/run.sh
+# dockerコンテナ起動
+bin/start.sh
 
-# コンテナ内でbash実行
+# dockerコンテナ内でbash実行
 bin/exec.sh
 
-# コンテナ内でbash実行(直接実行)
-bin/run.sh bash -l
+# dockerコンテナ停止
+bin/stop.sh
+
+# dockerコンテナ起動してbash実行
+bin/run.sh
 ```
 
 ## 参考
@@ -32,6 +35,10 @@ bin/run.sh bash -l
 /home/setup
 |-- .config/
 |   |-- home-manager/
+|   |   |   `-- dotfiles/
+|   |   |       |-- _bash_aliases
+|   |   |       |-- _bash_profile
+|   |   |       `-- _bashrc
 |   |   |-- flake.lock
 |   |   |-- flake.nix
 |   |   `-- home.nix

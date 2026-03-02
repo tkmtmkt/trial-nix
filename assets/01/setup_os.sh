@@ -30,12 +30,9 @@ GOSU_VERSION=1.19
 curl -o /usr/local/bin/gosu -sSL "https://github.com/tianon/gosu/releases/download/${GOSU_VERSION}/gosu-amd64"
 chmod +x /usr/local/bin/gosu
 
-# 日本語設定
-localedef -f UTF-8 -i ja_JP ja_JP.UTF-8
+# 言語とタイムゾーン設定
 echo 'LANG="ja_JP.UTF-8"' > /etc/locale.conf
-
-# タイムゾーン設定
 ln -sf /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
 
-# サービス有効化
+# サービス自動起動設定
 systemctl enable httpd
