@@ -24,6 +24,6 @@ cp -r ${SCRIPT_DIR}/trial-django/code ~/
 # ユーザ環境にパッケージインストール
 export UV_PROJECT_ENVIRONMENT=${HOME}/.local/share/venv
 cd ~/code
-uv sync
-uv run python manage.py collectstatic
+uv sync --frozen --no-install-project
+uv run manage.py collectstatic
 uv cache clean
