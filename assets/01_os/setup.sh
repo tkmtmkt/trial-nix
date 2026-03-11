@@ -35,6 +35,7 @@ curl -o /usr/local/bin/gosu -sSL "https://github.com/tianon/gosu/releases/downlo
 chmod +x /usr/local/bin/gosu
 
 # 言語とタイムゾーン設定
+localedef -f UTF-8 -i ja_JP ja_JP.UTF-8
 echo 'LANG="ja_JP.UTF-8"' > /etc/locale.conf
 ln -sf /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
 
