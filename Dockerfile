@@ -2,23 +2,23 @@ FROM almalinux:9.6
 LABEL maintainer="Takamatsu Makoto <tkmtmkt@gmail.com>"
 
 # OSパッケージインストール
-RUN --mount=type=bind,source=./assets/01,target=/assets \
-  /assets/setup_os.sh
+RUN --mount=type=bind,source=./assets/01_os,target=/assets \
+  /assets/setup.sh
 
 # ユーザ追加
-RUN --mount=type=bind,source=./assets/02,target=/assets \
-  /assets/setup_user.sh
+RUN --mount=type=bind,source=./assets/02_user,target=/assets \
+  /assets/setup.sh
 
 # Nix設定
-RUN --mount=type=bind,source=./assets/03,target=/assets \
-  gosu setup /assets/setup_nix.sh
+RUN --mount=type=bind,source=./assets/03_nix,target=/assets \
+  gosu setup /assets/setup.sh
 
 # home-manager設定
-RUN --mount=type=bind,source=./assets/04,target=/assets \
-  gosu setup /assets/setup_hm.sh
+RUN --mount=type=bind,source=./assets/04_home,target=/assets \
+  gosu setup /assets/setup.sh
 
 # Python設定
-RUN --mount=type=bind,source=./assets/05,target=/assets \
-  gosu setup /assets/setup_python.sh
+RUN --mount=type=bind,source=./assets/05_python,target=/assets \
+  gosu setup /assets/setup.sh
 
 CMD ["/sbin/init"]
