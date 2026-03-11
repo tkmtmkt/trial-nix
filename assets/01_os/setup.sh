@@ -6,12 +6,16 @@ set -o nounset
 set -o pipefail
 #set -o xtrace
 
-# パッケージインストール
+# OSバージョン固定
 releasever=9.7
 echo "${releasever}" > /etc/dnf/vars/releasever
+
+# パッケージリポジトリ追加(EPEL)
 ln -s RPM-GPG-KEY-EPEL-9 /etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-${releasever}
 dnf install -y epel-release
 dnf update -y
+
+# パッケージインストール
 dnf install -y \
   gcc-c++ \
   glibc-langpack-ja \
