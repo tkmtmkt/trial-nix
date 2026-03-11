@@ -7,7 +7,7 @@ set -o pipefail
 #set -o xtrace
 
 # パッケージインストール
-releasever=9.6
+releasever=9.7
 echo "${releasever}" > /etc/dnf/vars/releasever
 ln -s RPM-GPG-KEY-EPEL-9 /etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-${releasever}
 dnf install -y epel-release

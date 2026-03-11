@@ -1,4 +1,4 @@
-FROM almalinux:9.6
+FROM almalinux:9.7
 LABEL maintainer="Takamatsu Makoto <tkmtmkt@gmail.com>"
 
 # OSパッケージインストール
