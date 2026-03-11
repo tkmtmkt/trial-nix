@@ -66,6 +66,16 @@
     ".bash_profile".source = dotfiles/_bash_profile;
     ".bashrc".force = true;
     ".bashrc".source = dotfiles/_bashrc;
+    ".gitconfig".force = true;
+    ".gitconfig".source = dotfiles/_gitconfig;
+    ".gitexclude".force = true;
+    ".gitexclude".source = dotfiles/_gitexclude;
+    ".profile".force = true;
+    ".profile".source = dotfiles/_profile;
+    ".tigrc".force = true;
+    ".tigrc".source = dotfiles/_tigrc;
+    ".tmux.conf".force = true;
+    ".tmux.conf".source = dotfiles/_tmux.conf;
     ".ssh/config".force = true;
     ".ssh/config".source = dotfiles/_ssh/config;
 
