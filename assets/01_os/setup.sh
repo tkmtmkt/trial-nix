@@ -13,6 +13,10 @@ echo "${releasever}" > /etc/dnf/vars/releasever
 # パッケージリポジトリ追加(EPEL)
 ln -s RPM-GPG-KEY-EPEL-9 /etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-${releasever}
 dnf install -y epel-release
+
+# パッケージリポジトリ追加(pgdg)
+# https://www.postgresql.org/download/linux/redhat/
+dnf install -y https://download.postgresql.org/pub/repos/yum/reporpms/EL-9-x86_64/pgdg-redhat-repo-latest.noarch.rpm
 dnf update -y
 
 # パッケージインストール
@@ -25,6 +29,7 @@ dnf install -y \
   iproute \
   openssh-clients \
   passwd \
+  postgresql18 \
   procps-ng \
   sudo
 dnf clean all
