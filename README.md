@@ -4,10 +4,6 @@ Nix
 ## 操作
 
 ```sh
-# submodule取得
-git submodule init
-git submodule update
-
 # dockerイメージ作成
 bin/build.sh
 

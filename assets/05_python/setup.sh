@@ -19,7 +19,8 @@ export PYTHONUNBUFFERED=1
 # ファイル配置
 mkdir -p ~/.config
 cp -r ${SCRIPT_DIR}/_config/* ~/.config/
-cp -r ${SCRIPT_DIR}/trial-django/code ~/
+git clone https://github.com/tkmtmkt/trial-django.git /var/cache/tmp/trial-django
+cp -r /var/cache/tmp/trial-django/code ~/
 
 # ユーザ環境にパッケージインストール
 export UV_PROJECT_ENVIRONMENT=${HOME}/.local/share/venv

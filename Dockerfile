@@ -19,6 +19,7 @@ RUN --mount=type=bind,source=./assets/04_home,target=/assets \
 
 # Python設定
 RUN --mount=type=bind,source=./assets/05_python,target=/assets \
+    --mount=type=cache,target=/var/cache/tmp,uid=1000,gid=1000,mode=0777 \
   gosu setup /assets/setup.sh
 
 CMD ["/sbin/init"]
