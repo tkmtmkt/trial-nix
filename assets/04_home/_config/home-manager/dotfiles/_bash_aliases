@@ -33,3 +33,5 @@ alias tmkw='tmux kill-window -t'
 alias tmlp='tmux list-panes -t '
 alias tmrl='tmux source-file ~/.tmux.conf'
 alias tmd='tmux detach '
+
+# vim: set ft=sh ts=2 sw=2 et:

@@ -15,6 +15,6 @@ export USER=$(id -un)
 . ~/.nix-profile/etc/profile.d/nix.sh
 
 # home-manager設定
-nix run home-manager/master -- switch
+nix run home-manager/master -- switch --impure
 
 rm -rf ~/.cache

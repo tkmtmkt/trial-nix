@@ -1,10 +1,13 @@
 { config, pkgs, ... }:
 
+let
+  username = builtins.getEnv "USER";
+in
 {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
-  home.username = "setup";
-  home.homeDirectory = "/home/setup";
+  home.username = "${username}";
+  home.homeDirectory = "/home/${username}";
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
@@ -21,14 +24,24 @@
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
     # pkgs.hello
+    bash-completion     # bash環境用のコマンド入力補完
+    bash-git-prompt     # bash環境用のgitプロンプト表示
     bat                 # catの代替コマンド
+    bottom              # topの代替コマンド
+    byobu               # ターミナルマルチプレクサ
+    delta               # diffの代替コマンド
+    dust                # duの代替コマンド
+    eza                 # lsの代替コマンド
     fd                  # findの代替コマンド
     fio                 # ディスク性能テストツール
     git                 # バージョン管理ツール
     hexyl               # odの代替コマンド
+    hexyl               # odの代替コマンド
     htop                # topの代替コマンド
+    hyperfine           # timeの代替コマンド
     lnav                # ログビューア
     p7zip               # ファイルアーカイバ
+    parallel            # 並列実行コマンド
     procs               # psの代替コマンド
     pwgen               # ランダムなパスワードを生成するコマンド
     ripgrep             # grepの代替コマンド
@@ -37,7 +50,7 @@
     tree                # ディレクトリ構造表示ツール
     uv                  # Pythonパッケージ管理ツール
     vifm                # ファイルマネージャ
-    vim                 # テキストエディタ
+    zoxide              # cdの代替コマンド
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
@@ -76,8 +89,6 @@
     ".tigrc".source = dotfiles/_tigrc;
     ".tmux.conf".force = true;
     ".tmux.conf".source = dotfiles/_tmux.conf;
-    ".ssh/config".force = true;
-    ".ssh/config".source = dotfiles/_ssh/config;
 
     # # You can also set the file content immediately.
     # ".gradle/gradle.properties".text = ''
@@ -100,13 +111,38 @@
   #
   # or
   #
-  #  /etc/profiles/per-user/setup/etc/profile.d/hm-session-vars.sh
+  #  /etc/profiles/per-user/${USER}/etc/profile.d/hm-session-vars.sh
   #
   home.sessionVariables = {
     # EDITOR = "emacs";
-    UV_PROJECT_ENVIRONMENT = "${config.home.homeDirectory}/.local/share/venv";
   };
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
+  programs.vim = {
+    enable = true;
+    plugins = with pkgs.vimPlugins; [
+      SudoEdit-vim
+      ale
+      asyncomplete-lsp-vim
+      asyncomplete-vim
+      context_filetype-vim
+      editorconfig-vim
+      nerdtree
+      tcomment_vim
+      vim-airline
+      vim-airline-clock
+      vim-airline-themes
+      vim-colorschemes
+      vim-fugitive
+      vim-indent-guides
+      vim-lsp
+      vim-lsp-settings
+      vim-surround
+      vim-vsnip
+      vim-vsnip-integ
+      vimagit
+    ];
+    extraConfig = builtins.readFile ./extra/vimrc.vim;
+  };
 }
