@@ -10,3 +10,4 @@ set -o pipefail
 useradd -u 1000 -m setup -G wheel
 echo 'Passw0rd' | passwd --stdin setup
 echo "setup   ALL=(ALL)       NOPASSWD: ALL" >> /etc/sudoers
+chmod a+rx /home/setup

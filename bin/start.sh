@@ -10,7 +10,7 @@ set -o pipefail
 #set -o xtrace
 
 docker run --privileged --rm -td --name ${REPOSITORY} -h ${REPOSITORY} \
-  -v ${BASE_DIR}:${BASE_DIR} \
+  -v ${HOME}:${HOME} \
   -w ${BASE_DIR} \
   -p 8000:80 \
   ${REPOSITORY}:${TAG} "$@"

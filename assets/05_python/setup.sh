@@ -6,25 +6,22 @@ set -o nounset
 set -o pipefail
 #set -o xtrace
 
-# Nix設定
+# 環境設定
 export USER=$(id -un)
-. ~/.nix-profile/etc/profile.d/nix.sh
-
-# PYTHONDONTWRITEBYTECODEとPYTHONUNBUFFEREDはオプション
-# pycファイル(および__pycache__)の生成を行わないようにする
-export PYTHONDONTWRITEBYTECODE=1
-# 標準出力・標準エラーのストリームのバッファリングを行わない
-export PYTHONUNBUFFERED=1
+set +o nounset
+. ~/.bash_profile
+set -o nounset
 
 # ファイル配置
-mkdir -p ~/.config
-cp -r ${SCRIPT_DIR}/_config/* ~/.config/
-git clone https://github.com/tkmtmkt/trial-django.git /var/cache/tmp/trial-django
-cp -r /var/cache/tmp/trial-django/code ~/
-
-# ユーザ環境にパッケージインストール
-export UV_PROJECT_ENVIRONMENT=${HOME}/.local/share/venv
+git clone https://github.com/tkmtmkt/trial-django.git ~/trial-django
+ln -s ~/trial-django/code ~/code
 cd ~/code
+
+# プロジェクト環境設定
 uv sync --frozen --no-install-project
-uv run manage.py collectstatic
+uv run manage.py collectstatic --no-input
 uv cache clean
+
+# システム設定
+sudo sh etc/httpd/setup.sh
+sudo sh etc/systemd/setup.sh

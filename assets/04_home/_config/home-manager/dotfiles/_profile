@@ -5,6 +5,20 @@
 # 環境変数設定
 export XDG_CONFIG_HOME="${HOME}/.config"
 
+# PYTHONDONTWRITEBYTECODEとPYTHONUNBUFFEREDはオプション
+# pycファイル(および__pycache__)の生成を行わないようにする
+export PYTHONDONTWRITEBYTECODE=1
+# 標準出力・標準エラーのストリームのバッファリングを行わない
+export PYTHONUNBUFFERED=1
+# pipがSSL証明書の検証をスキップして指定したホストを信頼する
+export PIP_TRUSTED_HOST="pypi.org pypi.python.org files.pythonhosted.org"
+# ユーザ環境にパッケージインストール
+export UV_PROJECT_ENVIRONMENT=${HOME}/.local/share/venv
+# uvがキャッシュからパッケージをインストールする際、リンクではなく実ファイルをコピーして配置する
+export UV_LINK_MODE=copy
+# uv run,lock実行時に依存関係の同期（同期処理）をスキップする
+export UV_NO_SYNC=no
+
 # User specific environment and startup programs
 if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]
 then

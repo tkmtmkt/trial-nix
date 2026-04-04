@@ -10,7 +10,7 @@ set -o pipefail
 #set -o xtrace
 
 docker run --rm -ti --name ${REPOSITORY} -h ${REPOSITORY} \
-  -v ${BASE_DIR}:${BASE_DIR} \
+  -v ${HOME}:${HOME} \
   -w ${BASE_DIR} \
   -u setup \
   ${REPOSITORY}:${TAG} bash -l
