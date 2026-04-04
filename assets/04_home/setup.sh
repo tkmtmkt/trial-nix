@@ -17,4 +17,5 @@ export USER=$(id -un)
 # home-manager設定
 nix run home-manager/master -- switch --impure
 
+nix-collect-garbage --delete-old
 rm -rf ~/.cache

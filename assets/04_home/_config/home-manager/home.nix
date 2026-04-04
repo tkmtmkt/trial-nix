@@ -1,6 +1,7 @@
 { config, pkgs, ... }:
 
 let
+  # 環境変数を取得するためnix実行時に--impureオプションを指定する
   username = builtins.getEnv "USER";
 in
 {
@@ -24,33 +25,40 @@ in
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
     # pkgs.hello
-    bash-completion     # bash環境用のコマンド入力補完
-    bash-git-prompt     # bash環境用のgitプロンプト表示
+    # 代替コマンド
     bat                 # catの代替コマンド
     bottom              # topの代替コマンド
-    byobu               # ターミナルマルチプレクサ
     delta               # diffの代替コマンド
     dust                # duの代替コマンド
     eza                 # lsの代替コマンド
     fd                  # findの代替コマンド
-    fio                 # ディスク性能テストツール
-    git                 # バージョン管理ツール
-    hexyl               # odの代替コマンド
     hexyl               # odの代替コマンド
     htop                # topの代替コマンド
     hyperfine           # timeの代替コマンド
+    procs               # psの代替コマンド
+    ripgrep             # grepの代替コマンド
+    zoxide              # cdの代替コマンド
+    # 開発用ツール
+    devbox              # 開発環境構築ツール
+    direnv              # 環境変数自動設定ツール
+    nix-direnv          # nix用のdirenv拡張機能
+    uv                  # Pythonパッケージ管理ツール
+    # その他ツール
+    bash-completion     # bash環境用のコマンド入力補完
+    byobu               # ターミナルマルチプレクサ
+    fio                 # ディスク性能テストツール
+    git                 # バージョン管理ツール
+    jq                  # JSONデータ処理ツール
+    lazygit             # ターミナル上で動作する高速・軽量なGitクライアント（TUI）
+    libxml2             # XMLファイルの解析、整形、検証ツール
     lnav                # ログビューア
     p7zip               # ファイルアーカイバ
     parallel            # 並列実行コマンド
-    procs               # psの代替コマンド
     pwgen               # ランダムなパスワードを生成するコマンド
-    ripgrep             # grepの代替コマンド
-    tig                 # gitブラウザ
+    tig                 # ターミナル上でgit操作を行うためのCUIツール
     tmux                # ターミナルエミュレータ
     tree                # ディレクトリ構造表示ツール
-    uv                  # Pythonパッケージ管理ツール
     vifm                # ファイルマネージャ
-    zoxide              # cdの代替コマンド
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
@@ -79,16 +87,16 @@ in
     ".bash_profile".source = dotfiles/_bash_profile;
     ".bashrc".force = true;
     ".bashrc".source = dotfiles/_bashrc;
-    ".gitconfig".force = true;
-    ".gitconfig".source = dotfiles/_gitconfig;
-    ".gitexclude".force = true;
-    ".gitexclude".source = dotfiles/_gitexclude;
     ".profile".force = true;
     ".profile".source = dotfiles/_profile;
-    ".tigrc".force = true;
-    ".tigrc".source = dotfiles/_tigrc;
-    ".tmux.conf".force = true;
-    ".tmux.conf".source = dotfiles/_tmux.conf;
+    ".config/git/config".force = true;
+    ".config/git/config".source = dotfiles/_config/git/config;
+    ".config/git/exclude".force = true;
+    ".config/git/exclude".source = dotfiles/_config/git/exclude;
+    ".config/tig/config".force = true;
+    ".config/tig/config".source = dotfiles/_config/tig/config;
+    ".config/tmux/tmux.conf".force = true;
+    ".config/tmux/tmux.conf".source = dotfiles/_config/tmux/tmux.conf;
 
     # # You can also set the file content immediately.
     # ".gradle/gradle.properties".text = ''
@@ -114,11 +122,19 @@ in
   #  /etc/profiles/per-user/${USER}/etc/profile.d/hm-session-vars.sh
   #
   home.sessionVariables = {
-    # EDITOR = "emacs";
+    EDITOR = "vim";
   };
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
+
+  # direnvのシェル統合設定
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
+  };
+
+  # Vim設定
   programs.vim = {
     enable = true;
     plugins = with pkgs.vimPlugins; [
