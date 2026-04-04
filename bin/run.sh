@@ -12,4 +12,5 @@ set -o pipefail
 docker run --rm -ti --name ${REPOSITORY} -h ${REPOSITORY} \
   -v ${BASE_DIR}:${BASE_DIR} \
   -w ${BASE_DIR} \
+  -u setup \
   ${REPOSITORY}:${TAG} bash -l
