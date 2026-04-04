@@ -27,6 +27,7 @@ dnf -y install \
   httpd \
   httpd-devel \
   iproute \
+  mod_ssl \
   openssh-clients \
   passwd \
   postgresql18 \
