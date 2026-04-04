@@ -9,4 +9,4 @@ set -o nounset
 set -o pipefail
 #set -o xtrace
 
-docker images ${REPOSITORY}
+docker images --format table ${REPOSITORY}
