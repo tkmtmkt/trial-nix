@@ -10,6 +10,10 @@ set -o pipefail
 mkdir -p ~/.config
 cp -r ${SCRIPT_DIR}/_config/* ~/.config/
 
+# Nixストアディレクトリ作成
+sudo mkdir -m 0755 /nix
+sudo chown setup:setup /nix
+
 # Nixインストール
 sh <(curl -L https://nixos.org/nix/install) --no-daemon
 

@@ -12,15 +12,15 @@ echo "${releasever}" > /etc/dnf/vars/releasever
 
 # パッケージリポジトリ追加(EPEL)
 ln -s RPM-GPG-KEY-EPEL-9 /etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-${releasever}
-dnf install -y epel-release
+dnf -y install epel-release
 
 # パッケージリポジトリ追加(pgdg)
 # https://www.postgresql.org/download/linux/redhat/
-dnf install -y https://download.postgresql.org/pub/repos/yum/reporpms/EL-9-x86_64/pgdg-redhat-repo-latest.noarch.rpm
-dnf update -y
+dnf -y install https://download.postgresql.org/pub/repos/yum/reporpms/EL-9-x86_64/pgdg-redhat-repo-latest.noarch.rpm
+dnf -y update
 
 # パッケージインストール
-dnf install -y \
+dnf -y install \
   gcc-c++ \
   glibc-langpack-ja \
   glibc-locale-source \
@@ -31,7 +31,8 @@ dnf install -y \
   passwd \
   postgresql18 \
   procps-ng \
-  sudo
+  sudo \
+  which
 dnf clean all
 
 # gosuインストール
@@ -43,6 +44,3 @@ chmod +x /usr/local/bin/gosu
 localedef -f UTF-8 -i ja_JP ja_JP.UTF-8
 echo 'LANG="ja_JP.UTF-8"' > /etc/locale.conf
 ln -sf /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
-
-# サービス自動起動設定
-systemctl enable httpd
