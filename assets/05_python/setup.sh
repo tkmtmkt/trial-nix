@@ -13,7 +13,7 @@ set +o nounset
 set -o nounset
 
 # ファイル配置
-git clone https://github.com/tkmtmkt/trial-django.git ~/trial-django
+git clone -b main https://github.com/tkmtmkt/trial-django.git ~/trial-django
 ln -s ~/trial-django/code ~/code
 cd ~/code
 
