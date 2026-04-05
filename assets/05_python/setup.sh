@@ -25,3 +25,4 @@ uv cache clean
 # システム設定
 sudo sh etc/httpd/setup.sh
 sudo sh etc/systemd/setup.sh
+sudo chmod a+rx /var/log/httpd
