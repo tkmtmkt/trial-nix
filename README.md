@@ -25,16 +25,27 @@ bin/run.sh
 
 ## 参考
 
-### ディレクトリ構成
+### 実行環境のディレクトリ構成
 
 ```
 /home/setup
 |-- .config/
 |   |-- home-manager/
 |   |   |   `-- dotfiles/
+|   |   |       |-- _config/
+|   |   |       |   |-- git/
+|   |   |       |   |   |-- config
+|   |   |       |   |   `-- exclude
+|   |   |       |   |-- tig/
+|   |   |       |   |   `-- config
+|   |   |       |   `-- tmux/
+|   |   |       |       `-- tmux.conf
+|   |   |       |-- _ssh/
+|   |   |       |   `-- config
 |   |   |       |-- _bash_aliases
 |   |   |       |-- _bash_profile
-|   |   |       `-- _bashrc
+|   |   |       |-- _bashrc
+|   |   |       `-- _profile
 |   |   |-- flake.lock
 |   |   |-- flake.nix
 |   |   `-- home.nix
@@ -42,20 +53,19 @@ bin/run.sh
 |       `-- nix.conf
 |-- .local/
 |   |-- share/
-|   |   |-- home-manager/
-|   |   `-- uv/
-|   |       `-- python/
+|   |   |-- uv/
+|   |   |   `-- python/
+|   |   `-- venv/
 |   `-- state/
 |       |-- home-manager/
 |       `-- nix/
 |           `-- profiles/
 |               |-- channels -> channels-1-link/
-|               |-- channels-1-link -> /nix/store/ra3vim6szfqk10kdmvx08q4qf8vhk0rz-user-environment/
+|               |-- channels-1-link -> /nix/store/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-user-environment/
 |               |-- home-manager -> home-manager-1-link/
-|               |-- home-manager-1-link -> /nix/store/1fzgn9r8614zv7li9g8w0lyc4wna9f4g-home-manager-generation/
-|               |-- profile -> profile-2-link/
-|               |-- profile-1-link -> /nix/store/qwgafbjdrz82ya7i1z18z23d1l59kmvm-user-environment/
-|               `-- profile-2-link -> /nix/store/nqwifm13jjhjnacz8by18kpkb1h497f9-user-environment/
+|               |-- home-manager-1-link -> /nix/store/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-home-manager-generation/
+|               |-- profile -> profile-1-link/
+|               `-- profile-1-link -> /nix/store/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-user-environment/
 |-- .nix-channels
 |-- .nix-defexpr/
 |   |-- channels -> /home/setup/.local/state/nix/profiles/channels/
