@@ -12,5 +12,6 @@ set -o pipefail
 docker run --privileged --rm -td --name ${REPOSITORY} -h ${REPOSITORY} \
   -v ${HOME}:${HOME} \
   -w ${BASE_DIR} \
-  -p 8000:80 \
+  -p 8080:80 \
+  -p 8443:443 \
   ${REPOSITORY}:${TAG} "$@"
